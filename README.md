@@ -1,76 +1,155 @@
-# CS-340-8-2-Journal-Portfolio-Item
-8-2 Journal: Portfolio Item
-CS 340 Project 2: Grazioso Salvare Rescue Dashboard
-Author: Kain Mason
-Course: CS 340 - Client/Server Development
-Project: Two – Full Stack Dashboard Application
 
-________________________________________
-Project Overview
-This project demonstrates a functional, full-stack dashboard application built for Grazioso Salvare, a company that identifies and trains rescue dogs. The dashboard pulls data from a MongoDB database using a custom Python CRUD module (animal_Shelter.py) and displays it interactively using Dash by Plotly.
-Users can filter dog profiles by rescue type and visualize outcomes both through a data table and geolocation/chart widgets.
-________________________________________
-Technologies Used
-•	Python 3.x
-•	Dash & JupyterDash – for interactive dashboards
-•	Dash Leaflet – for map visualization
-•	Pandas & Plotly Express – for data wrangling and charting
-•	MongoDB + PyMongo – for storing and retrieving structured animal records
-________________________________________
-Authentication Setup
-This dashboard uses user-provided credentials to connect to the MongoDB instance. For this project, the aacuser account created in Module 3 is used.
-Connection is established in the CRUD module with:
-self.client = MongoClient(f"mongodb://{username}:{password}@{host}:{port}/?authSource=admin")
-________________________________________
-How the CRUD Module Works
-The animal_Shelter.py file defines a reusable class AnimalShelter that handles:
-•	create() – Adds new animal records to the MongoDB collection.
-•	read(query) – Retrieves data based on filters (supports empty query for full dataset).
-•	update(query, new_values) – Updates one or more documents.
-•	delete(query) – Removes one or more documents.
-This modular design makes it easy to connect the backend to any front-end dashboard or app.
-________________________________________
-Dashboard Functionality
-The dashboard supports:
-Filterable Radio Buttons:
-•	Water Rescue
-•	Mountain/Wilderness Rescue
-•	Disaster/Individual Tracking
-•	Reset (shows all animals)
-Data Table:
-•	Displays dynamic dog records
-•	Supports filtering, sorting, and row selection
-•	Highlights a custom "rescue_type" column based on selected filter
-Map Visualization:
-•	Shows the selected dog's location using Dash Leaflet
-•	Centered on the latitude and longitude in the dataset
-Chart:
-•	A bar chart (histogram) showing outcome types (e.g., Adopted, Transferred)
- Logo & Branding:
-•	Custom Grazioso Salvare logo is displayed at the top of the dashboard
-•	Your name (Kain Mason) is included for identification
-________________________________________
-Screenshots or Demo Proof
-Be sure to include these in your final documentation:
-1.	Dashboard start state (with logo, radio items, table, map, and chart visible)
- 
-2.	Water Rescue filter activated
- 
-3.	Mountain/Wilderness Rescue filter activated
- 
-4.	Disaster/Tracking filter activated
- 
-5.	Reset state showing all data
- 
-________________________________________
- File Structure
+
+# CS-340 Grazioso Salvare Rescue Dashboard – Enhanced Version  
+**Author:** Kain Mason  
+**Course:** CS 340 – Client/Server Development  
+**Project:** Full Stack Dashboard Application (Enhanced for CS-499 Capstone)
+
+---
+
+## Project Overview
+This project implements a functional, full-stack dashboard application for **Grazioso Salvare**, a company specializing in identifying and training rescue dogs. The dashboard connects to a **MongoDB Atlas** database using a custom Python CRUD module (`animal_Shelter.py`) and presents data interactively using **Dash by Plotly**.
+
+As part of my CS-499 capstone, I enhanced this artifact by improving query structure, strengthening input validation, standardizing return values, and expanding documentation so the system behaves more reliably and professionally.
+
+Users can filter dogs by rescue category, review key attributes through a searchable data table, visualize outcome metrics, and view geographic locations using integrated map components.
+
+---
+
+## Technologies Used
+- **Python 3.x**
+- **Dash / JupyterDash** – interactive web dashboard  
+- **Dash Leaflet** – map rendering for latitude/longitude points  
+- **Pandas & Plotly Express** – data manipulation and visualization  
+- **MongoDB Atlas + PyMongo** – cloud database and query engine  
+
+---
+
+## Authentication Setup
+The dashboard authenticates with MongoDB using the user credentials created during CS-340.
+
+Connection example (inside CRUD module):
+
+```python
+self.client = MongoClient(
+    f"mongodb://{username}:{password}@{host}:{port}/?authSource=admin"
+)
+```
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+## Enhanced CRUD Module Overview
+
+The animal_Shelter.py file defines the AnimalShelter class used to interact with MongoDB.
+
+Core Methods
+
+create(data) – Inserts new animal documents
+
+read(query) – Retrieves records based on filtering criteria
+
+update(query, new_values) – Modifies existing documents
+
+delete(query) – Removes matching documents
+
+### Enhancements Made in CS-499
+
+✔ Refactored query structures using consistent MongoDB operators ($and, $regex, $in)
+✔ Added input validation to prevent malformed queries
+✔ Improved error handling to avoid dashboard crashes
+✔ Standardized return formats for cleaner Dash integrations
+✔ Expanded inline documentation to describe each operation clearly
+
+## Dashboard Functionality
+### Filter Options
+
+Water Rescue
+
+Mountain/Wilderness Rescue
+
+Disaster / Individual Tracking
+
+Reset (clear filters)
+
+### Data Table
+
+Displays live records from MongoDB
+
+Supports sorting, filtering, and row selection
+
+Includes a custom computed rescue_type column
+
+Handles missing or unexpected values consistently (enhancement)
+
+### Map Visualization
+
+Uses Dash Leaflet to pinpoint selected animal locations
+
+Centers automatically on the latitude/longitude from the dataset
+
+Improved handling for missing or malformed coordinates (enhancement)
+
+Outcome Chart
+
+Bar chart visualizing outcome types (Adopted, Transferred, etc.)
+
+Updated to handle new return formats from the enhanced CRUD functions
+
+### Branding & Layout
+
+Includes the Grazioso Salvare logo
+
+Includes student identification (Kain Mason)
+
+Layout formatting improved for consistency
+
+## Enhancements Completed for CS-499
+### Database & Query Enhancements
+
+Cleaned and standardized MongoDB query logic
+
+Removed redundant or inconsistent filtering patterns
+
+Added safer handling of empty queries and invalid inputs
+
+### Security & Validation Improvements
+
+Validated search parameters before executing queries
+
+Added safeguards against malformed input
+
+Ensured predictable outputs even when data is missing
+
+### Documentation & Clarity
+
+Expanded README with setup, usage, and schema overview
+
+Added better comments in CRUD module explaining operations
+
+Clarified expected return structures for Dash callbacks
+
+### Stability Fixes
+
+Prevented callback failures due to inconsistent data
+
+Improved table/map/chart synchronization
+
+These enhancements significantly improve the reliability, professional quality, and clarity of the artifact.
+
+
+
+File Structure
 ├── Project2.ipynb               # Dashboard UI + callbacks
-├── animal_Shelter.py           # CRUD Python module
-├── photo.png                   # Grazioso Salvare logo (shown at top)
-└── README.md                   # This file
-________________________________________
- How to Run
-1.	Ensure MongoDB is running and contains the AAC dataset
-2.	Open the Project2.ipynb in Jupyter Notebook or Apporto
-3.	Run all cells to launch the dashboard
-________________________________________
+├── animal_Shelter.py            # Enhanced CRUD module
+├── photo.png                    # Grazioso Salvare branding
+└── README.md                    # Project documentation (this file)
+
+## How to Run the Dashboard
+
+Ensure your MongoDB Atlas cluster contains the AAC dataset
+
+Open Project2.ipynb in Jupyter Notebook or Apporto
+
+Run all cells to launch the Dashboard
+
+The Dash application will open in a browser tab or inline depending on the environment.
