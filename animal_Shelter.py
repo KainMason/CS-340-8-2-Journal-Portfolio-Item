@@ -2,6 +2,7 @@
 # Course: CS 340
 # Milestone: Module Six
 # Description: CRUD operations for Animal collection in MongoDB
+# Enhancements made on 11-27-2025
 
 from pymongo import MongoClient, errors
 from bson.objectid import ObjectId
